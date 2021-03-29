@@ -7,7 +7,7 @@ class Aluno(models.Model):
     criado_em = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.nome
+        return self.email
 
 
 
@@ -25,3 +25,15 @@ class Pergunta(models.Model):
 
     def __str__(self):
         return self.enunciado
+
+class Resposta(models.Model):
+    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
+    pergunta = models.ForeignKey(Pergunta, on_delete=models.CASCADE)
+    pontos = models.IntegerField()
+    respondida_em = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['aluno','pergunta'], name='resposta_unica')
+        ]
+
