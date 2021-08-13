@@ -62,7 +62,10 @@ def perguntas(request, indice):
                         diferenca_em_seguntos = int(diferenca.total_seconds())
                         pontos = max(10, PONTUACAO_MAXIMA - diferenca_em_seguntos)
                         Resposta(aluno_id=aluno_id, pergunta=pergunta, pontos=pontos).save()
+
                     return redirect(f'/perguntas/{indice + 1}')
+
+
                 ctx['resposta_indice'] = resposta_indice
                 Resposta(aluno_id=aluno_id, pergunta=pergunta, pontos=0).save()
 
